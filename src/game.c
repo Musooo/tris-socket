@@ -5,6 +5,8 @@
 #define EMPTY ' '
 #define ROW 5
 #define COLUMN 5
+#define SELECT_BOX(f, row, column) (f->field[row][column])
+#define SELECT_BOX_WITH_CHAR(f, choice) (f->field[atoi(&choice[1])][atoi(&choice[2])])
 /*
 0|0|0
 -----
@@ -49,6 +51,7 @@ void insert_choice(field* f, char *choice){
     switch (choice[0])
     {
     case 'A':
+        SELECT_BOX_WITH_CHAR(f, choice);
         break;
     case 'B':
         break;
@@ -59,22 +62,17 @@ void insert_choice(field* f, char *choice){
 }
 
 int is_available(field* f, char *choice){
-    if (f->field[atoi(&choice[0])][atoi(&choice[1])] != EMPTY){
+    if (SELECT_BOX_WITH_CHAR(f, choice) != EMPTY){
         printf("not empty");
         return 1;
     }
     return 0;
 }
 
+//choice 'PLAYERID(A or B)ROWCOLUMN[1,3,5][1,3,5])'
 int main(){
     field *ptrf = (field *)malloc(sizeof(field));
     init_field(ptrf);
-    // for (int i = 0; i< 4; i++){
-    //     print_field(ptrf);
-    //     printf("\n%d", i);
-    //     fflush(stdout);
-    //     sleep(3);
-    // }
 
     printf("%d\n", is_available(ptrf, "00"));
 
