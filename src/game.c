@@ -2,12 +2,27 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+int pow(int n,int b){
+    if (b==0){
+        return 1;
+    }
+    return n*pow(n,b-1);
+}
+
+int stringtoint(char *arr,int pos,int index){
+    if (pos==0){
+        return 0;
+    }
+
+    return (arr[index]-48)*pow(10,pos-1)+stringtoint(arr,pos-1,index+1);
+}
+
 #define EMPTY ' '
 #define ROW 5
 #define COLUMN 5
+#define ATOI_SINGLE(c) (stringtoint((char*) &c,1,0))
 #define SELECT_BOX(f, row, column) (f->field[row][column])
-#define SELECT_BOX_WITH_CHAR(f, choice) (f->field[atoi(&choice[1])][atoi(&choice[2])])
-
+#define SELECT_BOX_WITH_CHAR(f, c) (f->field[ATOI_SINGLE(c[1])][ATOI_SINGLE(c[2])])
 /*
 0|0|0
 -----
@@ -71,30 +86,19 @@ int is_available(field* f, char *choice){
     return 0;
 }
 
-int pow(int n,int b){
-    if (b==0){
-        return 1;
-    }
-    return n*pow(n,b-1);
-}
 
-int stringtoint(char *arr,int pos,int index){
-    if (pos==0){
-        return 0;
-    }
 
-    return (arr[index]-48)*pow(10,pos-1)+stringtoint(arr,pos-1,index+1);
-}
+
 
 //choice 'PLAYERID(A or B)ROWCOLUMN[0,2,4][0,2,4])'
 int main(){
-    char *c = "A02";
+    char *c = "B02";
     field *ptrf = (field *)malloc(sizeof(field));
     init_field(ptrf);
-    SELECT_BOX(ptrf,atoi(&c[1]),atoi(&c[2])) = 'X';
+    SELECT_BOX(ptrf,ATOI_SINGLE(c[1]),ATOI_SINGLE(c[2])) = 'X';
+    insert_choice(ptrf, c);
     //SELECT_BOX_WITH_CHAR(ptrf, c) = 'O';
     print_field(ptrf);
-    printf("%c\n%c\n", c[1], c[2]);
-    printf("%d\n%d\n", stringtoint((char*) &c[1],1,0),stringtoint((char*) &c[2],1,0));
+    printf("%d\n%d\n", ATOI_SINGLE(c[1]), ATOI_SINGLE(c[2]));
     return 0;
 }
