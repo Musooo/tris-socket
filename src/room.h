@@ -1,3 +1,6 @@
+#ifndef ROOM_H
+#define ROOM_H
+
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -10,12 +13,7 @@ typedef struct {
     int room_number; //idk maybe will see
 }room;
 
-void add_player(room *r, struct sockaddr_in p){
-    r->players[r->full]=p;
-    r->full++;
-}
+void add_player(room *r, struct sockaddr_in p);
+void empty_room(room *r);
 
-void empty_room(room *r){
-    r->full = 0;
-    r->room_number = 0;
-}
+#endif

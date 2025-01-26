@@ -23,6 +23,7 @@ int stringtoint(char *arr,int pos,int index){
 #define ATOI_SINGLE(c) (stringtoint((char*) &c,1,0))
 #define SELECT_BOX(f, row, column) (f->field[row][column])
 #define SELECT_BOX_WITH_CHAR(f, c) (f->field[ATOI_SINGLE(c[1])][ATOI_SINGLE(c[2])])
+#define TURNCHANGE(turn) turn = (turn + 1)%2
 /*
 0|0|0
 -----
@@ -86,19 +87,15 @@ int is_available(field* f, char *choice){
     return 0;
 }
 
-
-
-
-
 //choice 'PLAYERID(A or B)ROWCOLUMN[0,2,4][0,2,4])'
-int main(){
-    char *c = "B02";
-    field *ptrf = (field *)malloc(sizeof(field));
-    init_field(ptrf);
-    SELECT_BOX(ptrf,ATOI_SINGLE(c[1]),ATOI_SINGLE(c[2])) = 'X';
-    insert_choice(ptrf, c);
-    //SELECT_BOX_WITH_CHAR(ptrf, c) = 'O';
-    print_field(ptrf);
-    printf("%d\n%d\n", ATOI_SINGLE(c[1]), ATOI_SINGLE(c[2]));
-    return 0;
-}
+// int main(){
+//     char *c = "B02";
+//     field *ptrf = (field *)malloc(sizeof(field));
+//     init_field(ptrf);
+//     SELECT_BOX(ptrf,ATOI_SINGLE(c[1]),ATOI_SINGLE(c[2])) = 'X';
+//     insert_choice(ptrf, c);
+//     //SELECT_BOX_WITH_CHAR(ptrf, c) = 'O';
+//     print_field(ptrf);
+//     printf("%d\n%d\n", ATOI_SINGLE(c[1]), ATOI_SINGLE(c[2]));
+//     return 0;
+// }
