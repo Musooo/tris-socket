@@ -142,6 +142,33 @@ client/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
 .PHONY : client/fast
 
+src/arena.o: src/arena.c.o
+.PHONY : src/arena.o
+
+# target to build an object file
+src/arena.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/arena.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/arena.c.o
+.PHONY : src/arena.c.o
+
+src/arena.i: src/arena.c.i
+.PHONY : src/arena.i
+
+# target to preprocess a source file
+src/arena.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/arena.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/arena.c.i
+.PHONY : src/arena.c.i
+
+src/arena.s: src/arena.c.s
+.PHONY : src/arena.s
+
+# target to generate assembly for a file
+src/arena.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/arena.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/arena.c.s
+.PHONY : src/arena.c.s
+
 src/client.o: src/client.c.o
 .PHONY : src/client.o
 
@@ -254,6 +281,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... client"
 	@echo "... server"
+	@echo "... src/arena.o"
+	@echo "... src/arena.i"
+	@echo "... src/arena.s"
 	@echo "... src/client.o"
 	@echo "... src/client.i"
 	@echo "... src/client.s"
