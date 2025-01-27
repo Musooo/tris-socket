@@ -23,7 +23,7 @@ int stringtoint(char *arr,int pos,int index){
 #define ATOI_SINGLE(c) (stringtoint((char*) &c,1,0))
 #define SELECT_BOX(f, row, column) (f->field[row][column])
 #define SELECT_BOX_WITH_CHAR(f, c) (f->field[ATOI_SINGLE(c[1])][ATOI_SINGLE(c[2])])
-#define TURNCHANGE(turn) turn = (turn + 1)%2
+#define TURN_CHANGE(turn) turn = (turn + 1)%2
 /*
 0|0|0
 -----

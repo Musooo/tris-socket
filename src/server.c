@@ -40,7 +40,8 @@ void* game_t(void *ptr){
         //receive the msg from the player
         //send it to the other, if the message is a stop message stop
         recv(sockfd, buffer, BUFFER_MAX, 0);
-        TURNCHANGE(turn);
+        //printf("%s", buffer);
+        TURN_CHANGE(turn);
         sendto(sockfd, buffer, BUFFER_MAX, 0, (struct sockaddr*)&r->players[turn], sizeof(struct sockaddr));
         if (buffer[0] == '-'){
             printf("closed room");
