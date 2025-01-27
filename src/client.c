@@ -10,11 +10,12 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
-#define BUFFER_MAX 1024
+#define BUFFER_MAX 23
 #define PORT 1313
 #define CHUNK (1024 * 1024)
 
 int turn = 0;
+char *player[2] = {"A", "B"}; 
 
 int main() {
     int sockfd;
@@ -37,31 +38,45 @@ int main() {
     servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
     // send a message to the server
-    snprintf(buffer, BUFFER_MAX, "Hello, server!");
+    snprintf(buffer, BUFFER_MAX, "H");
     sendto(sockfd, buffer, strlen(buffer), 0, (const struct sockaddr *) &servaddr, sizeof(servaddr));
     int len = sizeof(servaddr);
     while (1){
+        field *game_field = (field *)malloc(sizeof(field));
+        init_field(game_field);
         struct sockaddr_in game_server;
         int n = recvfrom(sockfd, buffer, BUFFER_MAX, 0, (struct sockaddr *) &game_server, &len);
         buffer[n] = '\0';
         int player_turn = atoi(buffer);
         printf("player number: %d", player_turn);
         printf("\n");
+        print_field(game_field);
         while (1){
             if (turn == player_turn){
-                printf("insert move:");
-                fgets(msg, BUFFER_MAX, stdin);
+                do
+                {
+                    printf("insert move:");
+                    fgets(buffer, BUFFER_MAX, stdin);
+                    snprintf(msg, BUFFER_MAX, "%c%s", *player[player_turn], buffer);
+                    //printf("%c\n", *player[player_turn]);
+                } while (is_available(game_field, msg));
+                //snprintf(msg, BUFFER_MAX, "%c", player[player_turn]); //A o B in base al numero               
+                insert_choice(game_field, msg);
                 sendto(sockfd, msg, BUFFER_MAX, 0, (struct sockaddr *) &game_server, sizeof(servaddr));
                 TURN_CHANGE(turn);
                 if (msg[0] == '-'){
                     break;
                 }
+                print_field(game_field);
             }else{
                 recv(sockfd, buffer, BUFFER_MAX, 0);
+                insert_choice(game_field, buffer);
+                print_field(game_field);
                 TURN_CHANGE(turn);
-                printf("%s", buffer);
+                //printf("%s", buffer);
             }
         }
+        free(game_field);
         break;
     }
     close(sockfd);

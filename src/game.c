@@ -87,7 +87,7 @@ int is_available(field* f, char *choice){
     return 0;
 }
 
-//choice 'PLAYERID(A or B)ROWCOLUMN[0,2,4][0,2,4])'
+//choice 'PLAYERID(A or B)ROWCOLUMN[0,2,4][0,2,4])' example A00
 // int main(){
 //     char *c = "B02";
 //     field *ptrf = (field *)malloc(sizeof(field));
