@@ -18,6 +18,7 @@ int stringtoint(char *arr,int pos,int index){
 }
 
 #define EMPTY ' '
+#define QUIT "quit"
 #define ROW 5
 #define COLUMN 5
 #define ATOI_SINGLE(c) (stringtoint((char*) &c,1,0))

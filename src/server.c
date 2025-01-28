@@ -39,11 +39,11 @@ void* game_t(void *ptr){
     while (1){
         //receive the msg from the player
         //send it to the other, if the message is a stop message stop
-        recv(sockfd, buffer, BUFFER_MAX, 0);
-        //printf("%s", buffer);
+        recv(sockfd, buffer, BUFFER_MAX, 0); //TODO after n time you send a concede msg
+
         TURN_CHANGE(turn);
         sendto(sockfd, buffer, BUFFER_MAX, 0, (struct sockaddr*)&r->players[turn], sizeof(struct sockaddr));
-        if (buffer[0] == '-'){
+        if (strcmp(buffer, QUIT)){
             printf("closed room");
             close(sockfd);
             break;
@@ -71,8 +71,15 @@ int main(){
         
         add_player(tmproom, client);
         if (tmproom->full == 2){
-            pthread_create(&game_thread_id, NULL, game_t, (void *)tmproom);
-            empty_room(tmproom);
+            room *new_room = tmproom; // Assign the current room to a new variable
+            tmproom = malloc(sizeof(room)); // Allocate a new room for the next game
+            if (tmproom == NULL) {
+                perror("Failed to allocate memory for tmproom");
+                exit(EXIT_FAILURE);
+            }
+            empty_room(tmproom); // Initialize the new room
+
+            pthread_create(&game_thread_id, NULL, game_t, (void *)new_room);
         }
     }
 
