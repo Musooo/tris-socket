@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int pow(int n,int b){
+int pow_mine(int n,int b){
     if (b==0){
         return 1;
     }
-    return n*pow(n,b-1);
+    return n*pow_mine(n,b-1);
 }
 
 int stringtoint(char *arr,int pos,int index){
@@ -14,7 +14,7 @@ int stringtoint(char *arr,int pos,int index){
         return 0;
     }
 
-    return (arr[index]-48)*pow(10,pos-1)+stringtoint(arr,pos-1,index+1);
+    return (arr[index]-48)*pow_mine(10,pos-1)+stringtoint(arr,pos-1,index+1);
 }
 
 #define EMPTY ' '

@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int pow(int n,int b);
+int pow_mine(int n,int b);
 int stringtoint(char *arr,int pos,int index);
 
 #define EMPTY ' '

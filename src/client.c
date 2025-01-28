@@ -22,7 +22,7 @@ int main() {
     char msg[BUFFER_MAX];
     struct sockaddr_in servaddr;
     char buffer[BUFFER_MAX];
-    Arena game_arena = arena_alloc(CHUNK);
+    //Arena game_arena = arena_alloc(CHUNK);
     //struct sockaddr_in *game_server = arena_push(&game_arena, sizeof(servaddr));
     //int *player_turn = arena_push(&game_arena, sizeof(int));
     // create datagram socket
@@ -64,12 +64,10 @@ int main() {
                 insert_choice(game_field, msg);
                 sendto(sockfd, msg, BUFFER_MAX, 0, (struct sockaddr *) &game_server, sizeof(servaddr));
                 TURN_CHANGE(turn);
-                if (msg[0] == '-'){
-                    break;
-                }
                 print_field(game_field);
             }else{
-                recv(sockfd, buffer, BUFFER_MAX, 0);
+                printf("waiting for the other player move\n");
+                recvfrom(sockfd, buffer, BUFFER_MAX, 0, (struct sockaddr *) &game_server, &len);
                 insert_choice(game_field, buffer);
                 print_field(game_field);
                 TURN_CHANGE(turn);
