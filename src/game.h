@@ -25,6 +25,6 @@ void init_field(field* f);
 void print_field(field* f);
 void insert_choice(field *f, char *choice);
 int is_available(field* f, char *choice);
-
+int game_winning(field* f);
 
 #endif

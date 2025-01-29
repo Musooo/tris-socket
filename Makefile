@@ -142,6 +142,19 @@ client/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
 .PHONY : client/fast
 
+#=============================================================================
+# Target rules for targets named game_test
+
+# Build rule for target.
+game_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_test
+.PHONY : game_test
+
+# fast build rule for target.
+game_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game_test.dir/build.make CMakeFiles/game_test.dir/build
+.PHONY : game_test/fast
+
 src/arena.o: src/arena.c.o
 .PHONY : src/arena.o
 
@@ -200,6 +213,7 @@ src/game.o: src/game.c.o
 src/game.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/game.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/game.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game_test.dir/build.make CMakeFiles/game_test.dir/src/game.c.o
 .PHONY : src/game.c.o
 
 src/game.i: src/game.c.i
@@ -209,6 +223,7 @@ src/game.i: src/game.c.i
 src/game.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/game.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/game.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game_test.dir/build.make CMakeFiles/game_test.dir/src/game.c.i
 .PHONY : src/game.c.i
 
 src/game.s: src/game.c.s
@@ -218,6 +233,7 @@ src/game.s: src/game.c.s
 src/game.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/game.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/game.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game_test.dir/build.make CMakeFiles/game_test.dir/src/game.c.s
 .PHONY : src/game.c.s
 
 src/room.o: src/room.c.o
@@ -271,6 +287,30 @@ src/server.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server.c.s
 .PHONY : src/server.c.s
 
+test/game_test.o: test/game_test.c.o
+.PHONY : test/game_test.o
+
+# target to build an object file
+test/game_test.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game_test.dir/build.make CMakeFiles/game_test.dir/test/game_test.c.o
+.PHONY : test/game_test.c.o
+
+test/game_test.i: test/game_test.c.i
+.PHONY : test/game_test.i
+
+# target to preprocess a source file
+test/game_test.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game_test.dir/build.make CMakeFiles/game_test.dir/test/game_test.c.i
+.PHONY : test/game_test.c.i
+
+test/game_test.s: test/game_test.c.s
+.PHONY : test/game_test.s
+
+# target to generate assembly for a file
+test/game_test.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game_test.dir/build.make CMakeFiles/game_test.dir/test/game_test.c.s
+.PHONY : test/game_test.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -280,6 +320,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... client"
+	@echo "... game_test"
 	@echo "... server"
 	@echo "... src/arena.o"
 	@echo "... src/arena.i"
@@ -296,6 +337,9 @@ help:
 	@echo "... src/server.o"
 	@echo "... src/server.i"
 	@echo "... src/server.s"
+	@echo "... test/game_test.o"
+	@echo "... test/game_test.i"
+	@echo "... test/game_test.s"
 .PHONY : help
 
 
