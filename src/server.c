@@ -40,7 +40,7 @@ void* game_t(void *ptr){
         //receive the msg from the player
         //send it to the other, if the message is a stop message stop
         recv(sockfd, buffer, BUFFER_MAX, 0); //TODO after n time you send a concede msg
-        printf("received: %s \n", buffer);
+        //printf("received: %s \n", buffer);
         TURN_CHANGE(turn);
         sendto(sockfd, buffer, BUFFER_MAX, 0, (struct sockaddr*)&r->players[turn], sizeof(struct sockaddr));
         // if (strcmp(buffer, QUIT)){

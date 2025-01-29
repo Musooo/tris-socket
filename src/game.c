@@ -88,6 +88,35 @@ int is_available(field* f, char *choice){
     return 0;
 }
 
+int game_winning(field* f){
+    for (int i = 0; i<5; i = i + 2){
+        if(SELECT_BOX(f, i, 0)==SELECT_BOX(f, i, 2) && SELECT_BOX(f, i, 0)==SELECT_BOX(f, i, 4)){
+            if (SELECT_BOX(f, i, 0)!=EMPTY)
+                return 1;
+        }
+    }
+
+    for (int i = 0; i<5; i = i + 2){
+        if(SELECT_BOX(f, 0, i)==SELECT_BOX(f, 2, i) && SELECT_BOX(f, 0, i)==SELECT_BOX(f, 4, i)){
+            if (SELECT_BOX(f, 0, i)!=EMPTY)
+                return 1;
+        }
+    }
+
+    if(SELECT_BOX(f, 0, 0)==SELECT_BOX(f, 2, 2) && SELECT_BOX(f, 0, 0)==SELECT_BOX(f, 4, 4)){
+        if (SELECT_BOX(f, 0, 0)!=EMPTY)
+            return 1;
+    }
+
+    if(SELECT_BOX(f, 0, 4)==SELECT_BOX(f, 2, 2) && SELECT_BOX(f, 0, 4)==SELECT_BOX(f, 4, 0)){
+        if (SELECT_BOX(f, 0, 4)!=EMPTY)
+            return 1;
+    }
+
+    return 0;
+}
+
+
 //choice 'PLAYERID(A or B)ROWCOLUMN[0,2,4][0,2,4])' example A00
 // int main(){
 //     char *c = "B02";
